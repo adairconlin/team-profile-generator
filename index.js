@@ -1,18 +1,21 @@
 const inquirer = require("inquirer");
 const { writeFile } = require("./utils/generate-site.js");
 const generatePage = require("./src/page-template.js");
-const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-let employeeData = {
-    managers: [],
-    engineers: [],
-    interns: []
-};
+// let employeeData = {
+//     managers: [],
+//     engineers: [],
+//     interns: []
+// };
 
-const promptManager = () => {
+const promptManager = employeeData => {
+    if(!employeeData.managers) {
+        employeeData.managers = [];
+    };
+
     console.log(`
 =========================
     Add a New Manager
@@ -81,7 +84,10 @@ const promptManager = () => {
     })
 };
 
-const promptEngineer = () => {
+const promptEngineer = employeeData => {
+    if(!employeeData.engineers) {
+        employeeData.engineers = [];
+    };
     console.log(`
 =========================
     Add a New Engineer
@@ -137,6 +143,12 @@ const promptEngineer = () => {
                 return false;
             }
         },
+        {
+            type: "confirm",
+            name: "confirmAddEngineer",
+            message: "Would you like to add another Engineer?",
+            default: false
+        }
     ])
     .then(({ name, id, email, github }) => {
         employeeData.engineers.push(new Engineer(name, id, email, github));
@@ -144,7 +156,10 @@ const promptEngineer = () => {
     });
 };
 
-const promptIntern = () => {
+const promptIntern = employeeData => {
+    if(!employeeData.interns) {
+        employeeData.interns = [];
+    };
     console.log(`
 =========================
     Add a New Intern
@@ -199,6 +214,12 @@ const promptIntern = () => {
                 console.log("Please provide the Intern's current school:");
                 return false;
             }
+        },
+        {
+            type: "confirm",
+            name: "confirmAddIntern",
+            message: "Would you like to add another Intern?",
+            default: false
         }
     ])
     .then(({ name, id, email, college }) => {
