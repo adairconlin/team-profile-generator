@@ -1,15 +1,18 @@
 const inquirer = require("inquirer");
-const { writeFile, copyFile } = require("./utils/generate-site.js");
+const { writeFile } = require("./utils/generate-site.js");
 const generatePage = require("./src/page-template.js");
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+let employeeData = {
+    managers: [],
+    engineers: [],
+    interns: []
+};
+
 const promptManager = () => {
-    // if(!employeeData.managers) {
-    //     employeeData.managers = [];
-    // }
     console.log(`
 =========================
     Add a New Manager
@@ -73,13 +76,12 @@ const promptManager = () => {
         }
     ])
     .then(({ name, id, email, officeNumber }) => {
-        const manager = new Manager(name, id, email, officeNumber);
-        console.log(manager);
-        return manager;
+        employeeData.managers.push(new Manager(name, id, email, officeNumber));
+        return employeeData;
     })
 };
 
-const promptEngineer = employeeData => {
+const promptEngineer = () => {
     console.log(`
 =========================
     Add a New Engineer
@@ -137,14 +139,12 @@ const promptEngineer = employeeData => {
         },
     ])
     .then(({ name, id, email, github }) => {
-        const engineer = new Engineer(name, id, email, github);
-        console.log(engineer);
-        console.log(engineer.getGithub());
-        return engineer;
+        employeeData.engineers.push(new Engineer(name, id, email, github));
+        return employeeData;
     });
 };
 
-const promptIntern = employeeData => {
+const promptIntern = () => {
     console.log(`
 =========================
     Add a New Intern
@@ -202,9 +202,8 @@ const promptIntern = employeeData => {
         }
     ])
     .then(({ name, id, email, college }) => {
-        const intern = new Intern(name, id, email, college);
-        console.log(intern);
-        return intern;
+        employeeData.interns.push(new Intern(name, id, email, college));
+        return employeeData;
     })
 }
 
@@ -212,3 +211,10 @@ const promptIntern = employeeData => {
 promptManager()
     .then(promptEngineer)
     .then(promptIntern)
+    .then(employeeData => {
+        console.log(employeeData);
+        return generatePage(employeeData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
