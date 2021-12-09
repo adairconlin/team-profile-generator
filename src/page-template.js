@@ -1,10 +1,25 @@
 function generateIntern(intern) {
-    return `
-<div>
-    <h1>Name:</h1>
-    <p>${intern[0].name}</p>
-</div>
-    `;
+    const internHTML = intern.map(({ name, id, email, school }) => {
+        return `<div class="card">
+                    <h1>Engineer</h1>
+                    <div>
+                        <h1>Name: ${name}</h1>
+                    </div>
+                    <div>
+                        <h3>ID: ${id}</h3>
+                    </div>
+                    <div>
+                    <h3>Email: <a href="mailto: ${email}">${email}</a></h3>
+                    </div>
+                    <div>
+                        <h3>School: ${school}</h3>
+                    </div>
+                </div>`;
+    });
+
+    return `<section class="role-section">
+                ${internHTML.join('')}
+            </section>`;
 };
 
 function generateEngineer(engineer) {
@@ -12,20 +27,16 @@ function generateEngineer(engineer) {
         return `<div class="card">
                     <h1>Engineer</h1>
                     <div>
-                        <h1>Name:</h1>
-                        <p>${name}</p>
+                        <h1>Name: ${name}</h1>
                     </div>
                     <div>
-                        <h1>ID:</h1>
-                        <p>${id}</p>
+                        <h3>ID: ${id}</h3>
                     </div>
                     <div>
-                        <h1>Email:</h1>
-                        <p>${email}</p>
+                        <h3>Email: <a href="mailto: ${email}">${email}</a></h3>
                     </div>
                     <div>
-                        <h1>Github Link:</h1>
-                        <p>https://github.com/${github}/</p>
+                        <h3><a href="https://github.com/${github}/">GitHub</a></h3>
                     </div>
                 </div>`;
     });
@@ -40,20 +51,16 @@ function generateManager(manager) {
         return `<div class="card">
                     <h1>Manager</h1>
                     <div>
-                        <h1>Name:</h1>
-                        <p>${name}</p>
+                        <h1>Name: ${name}</h1>
                     </div>
                     <div>
-                        <h1>ID:</h1>
-                        <p>${id}</p>
+                        <h3>ID: ${id}</h3>
                     </div>
                     <div>
-                        <h1>Email:</h1>
-                        <p>${email}</p>
+                    <h3>Email: <a href="mailto: ${email}">${email}</a></h3>
                     </div>
                     <div>
-                        <h1>Office Number:</h1>
-                        <p>${officeNumber}</p>
+                        <h3>Office Number: ${officeNumber}</h3>
                     </div>
                 </div>`;
     });
@@ -85,6 +92,7 @@ function generatePage(data) {
         <main>
             ${generateManager(data.managers)}
             ${generateEngineer(data.engineers)}
+            ${generateIntern(data.interns)}
         </main>
     </body>
 </html>

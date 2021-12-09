@@ -231,7 +231,7 @@ const promptIntern = employeeData => {
 
 promptManager({})
     .then(promptEngineer)
-    //.then(promptIntern)
+    .then(promptIntern)
     .then(employeeData => {
         return generatePage(employeeData);
     })
