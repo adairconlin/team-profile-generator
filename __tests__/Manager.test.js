@@ -9,7 +9,7 @@ test("creates a manager object", () => {
 });
 
 test("gets managers office number", () => {
-    const manager = new Manager("Boopers", 4321, "boopers@email.com");
+    const manager = new Manager("Boopers", 4321, "boopers@email.com", 36);
 
     expect(manager.officeNumber).toEqual(expect.any(Number));
 });

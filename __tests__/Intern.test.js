@@ -9,7 +9,7 @@ test("creates an intern object", () => {
 });
 
 test("gets intern school information", () => {
-    const intern = new Intern("Cookie", 12345, "cookie@email.com");
+    const intern = new Intern("Cookie", 12345, "cookie@email.com", "MSUM");
 
     expect(intern.school).toEqual(expect.any(String));
     expect(intern.getSchool()).toBe(intern.school);
