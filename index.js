@@ -5,23 +5,15 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
-// let employeeData = {
-//     managers: [],
-//     engineers: [],
-//     interns: []
-// };
-
 const promptManager = employeeData => {
+    console.log(`
+=================
+Add a New Project
+=================
+`);
     if(!employeeData.managers) {
         employeeData.managers = [];
-    };
-
-    console.log(`
-=========================
-    Add a New Manager
-=========================
-    `);
-
+    }
     return inquirer.prompt([
         {
             type: "input",
@@ -78,8 +70,11 @@ const promptManager = employeeData => {
             default: false
         }
     ])
-    .then(({ name, id, email, officeNumber }) => {
+    .then(({ name, id, email, officeNumber, confirmAddManager }) => {
         employeeData.managers.push(new Manager(name, id, email, officeNumber));
+        if(confirmAddManager) {
+            return promptManager(employeeData);
+        }
         return employeeData;
     })
 };
@@ -150,8 +145,11 @@ const promptEngineer = employeeData => {
             default: false
         }
     ])
-    .then(({ name, id, email, github }) => {
+    .then(({ name, id, email, github, confirmAddEngineer }) => {
         employeeData.engineers.push(new Engineer(name, id, email, github));
+        if(confirmAddEngineer) {
+            return promptEngineer(employeeData);
+        }
         return employeeData;
     });
 };
@@ -222,18 +220,20 @@ const promptIntern = employeeData => {
             default: false
         }
     ])
-    .then(({ name, id, email, college }) => {
+    .then(({ name, id, email, college, confirmAddIntern }) => {
         employeeData.interns.push(new Intern(name, id, email, college));
+        if(confirmAddIntern) {
+            return promptIntern(employeeData);
+        }
         return employeeData;
     })
 }
 
-
-promptManager()
+promptManager({})
     .then(promptEngineer)
     .then(promptIntern)
     .then(employeeData => {
-        console.log(employeeData);
+        console.log(employeeData.managers.length);
         return generatePage(employeeData);
     })
     .then(pageHTML => {
