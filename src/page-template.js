@@ -8,21 +8,60 @@ function generateIntern(intern) {
 };
 
 function generateEngineer(engineer) {
-    return `
-    <div>
-        <h1>Name:</h1>
-        <p>${engineer[0].name}</p>
-    </div>
-        `;
+    const engineerHTML = engineer.map(({ name, id, email, github }) => {
+        return `<div class="card">
+                    <h1>Engineer</h1>
+                    <div>
+                        <h1>Name:</h1>
+                        <p>${name}</p>
+                    </div>
+                    <div>
+                        <h1>ID:</h1>
+                        <p>${id}</p>
+                    </div>
+                    <div>
+                        <h1>Email:</h1>
+                        <p>${email}</p>
+                    </div>
+                    <div>
+                        <h1>Github Link:</h1>
+                        <p>https://github.com/${github}/</p>
+                    </div>
+                </div>`;
+    });
+
+    return `<section class="role-section">
+                ${engineerHTML.join('')}
+            </section>`;
 };
 
 function generateManager(manager) {
-    return `
-    <div>
-        <h1>Name:</h1>
-        <p>${manager[0].name}</p>
-    </div>
-        `;
+    const managerHTML = manager.map(({ name, id, email, officeNumber }) => {
+        return `<div class="card">
+                    <h1>Manager</h1>
+                    <div>
+                        <h1>Name:</h1>
+                        <p>${name}</p>
+                    </div>
+                    <div>
+                        <h1>ID:</h1>
+                        <p>${id}</p>
+                    </div>
+                    <div>
+                        <h1>Email:</h1>
+                        <p>${email}</p>
+                    </div>
+                    <div>
+                        <h1>Office Number:</h1>
+                        <p>${officeNumber}</p>
+                    </div>
+                </div>`;
+    });
+
+    return `<section class="role-section">
+                ${managerHTML.join('')}
+            </section>
+            `;
 };
 
 function generatePage(data) {
@@ -46,7 +85,6 @@ function generatePage(data) {
         <main>
             ${generateManager(data.managers)}
             ${generateEngineer(data.engineers)}
-            ${generateIntern(data.interns)}
         </main>
     </body>
 </html>
