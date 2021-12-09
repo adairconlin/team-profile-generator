@@ -1,7 +1,111 @@
+/* MY COLORS */
+:root {
+    --faded-black: #3d3d3d;
+    --stormy-blue: #577D8A;
+    --seafoam-green: #719F9C;
+    --pale-yellow: #E2D8A7;
+    --bold-yellow: #DEC583;
+}
+
+/* FONTS */
+.myFont {
+    color: #3d3d3d;
+    font-family: neue-kabel,sans-serif;
+    font-style: normal;
+}
+
+/* regular */
+.employee-info div h3, footer h3 {
+    font-weight: 400;
+    font-size: 1.3vw;
+}
+
+.medium {
+    font-weight: 600;
+    font-size: 1.8vw;
+}
+
+.bold {
+    font-weight: 700;
+    font-size: 2.4vw;
+}
+
+/* black */
+header div h1 {
+    font-weight: 900;
+    font-size: 3vw;
+}
+
+/* GENERAL STYLING */
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-color: lightpink;
+    background-color: var(--pale-yellow);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: center;
+    background-color: var(--seafoam-green);
+    border-top: 3px solid var(--faded-black);
+    border-bottom: 3px solid var(--faded-black);
+}
+
+header div h1 {
+    margin: 25px 0 30px 0;
+}
+
+/* BODY */
+main {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 20vw;
+    height: 27vw;
+    margin-top: 50px;
+    border: 3px solid var(--faded-black);
+    border-radius: 10px;
+    background-color: var(--bold-yellow);
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title {
+    margin: 0 0 15px 0;
+}
+
+.title-section {
+    border-bottom: 3px solid var(--faded-black);
+}
+
+a {
+    color: var(--faded-black);
+    transition: .5s ease;
+}
+
+a:hover {
+    color: var(--stormy-blue);
+}
+
+/* FOOTER */
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--stormy-blue);
+    border-top: 3px solid var(--faded-black);
+    border-bottom: 3px solid var(--faded-black);
+    margin-top: auto;
 }
