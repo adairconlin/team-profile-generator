@@ -1,5 +1,5 @@
 const inquirer = require("inquirer");
-const { writeFile } = require("./utils/generate-site.js");
+const { writeFile, copyFile } = require("./utils/generate-site.js");
 const generatePage = require("./src/page-template.js");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -237,4 +237,14 @@ promptManager({})
     })
     .then(pageHTML => {
         return writeFile(pageHTML);
+    })
+    .then(writeResponse => {
+        console.log(writeResponse);
+        return copyFile();
+    })
+    .then(copyResponse => {
+        console.log(copyResponse);
+    })
+    .catch(err => {
+        console.log(err);
     })
